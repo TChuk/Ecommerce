@@ -1,0 +1,8 @@
+<%= link_to "Home", index_path %>
+<div id = products>
+  <% if params.has_key?(:id) %>
+    <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
+  <% else %>
+    <%= render partial: 'product', collection: @sortedproducts, locals: {full_details: false} %>
+  <% end %>
+</div>

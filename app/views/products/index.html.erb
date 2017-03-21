@@ -1,5 +1,15 @@
-<h1>Products</h1>
+<h1>TChuk Games</h1>
 <p>Currently Available products</p>
+<div>
+  <% @systems.each do |sys| %>
+    <%= link_to "#{sys.name}", sort_path(:id => sys.id) %>
+  <% end %>
+</div>
+<div>
+  <% @categories.each do |category| %>
+    <%= link_to "#{category.name}", catsort_path(:catid => category.id) %>
+  <% end %>
+</div>
 <div id = products>
   <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
 </div>
