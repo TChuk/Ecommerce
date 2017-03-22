@@ -7,6 +7,12 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    if @product.stock_quantity < 5
+      quantity_adjustment = 1.15
+    else
+      quantity_adjustment = 1
+    end
+    @tradeinvalue = (@product.price * 0.3) * quantity_adjustment
   end
 
   def sort
@@ -18,7 +24,10 @@ class ProductsController < ApplicationController
   end
 
   def search_results
-    @products = Product.where("name LIKE ? AND system_id = ?", "%#{params[:keywords]}%",
-     "#{params[:system_id]}")
+    system_params = params[:system_id]
+    @products = Product.where("name LIKE ?", "%#{params[:keywords]}%")
+    unless system_params.empty? || system_params.nil?
+      @products = @products.where("system_id = ?", system_params)
+    end
   end
 end

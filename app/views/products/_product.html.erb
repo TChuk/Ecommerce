@@ -12,10 +12,12 @@
     <strong>Price:</strong>
     <%= product.price %>
   </p>
+
   <p>
     <strong>Condition:</strong>
     <%= product.category.name %>
   </p>
+
   <% if full_details %>
     <p>
       <strong>Availability:</strong>
@@ -27,9 +29,15 @@
     </p>
 
     <p>
+      <strong>Trade-in Value:</strong>
+      <%= @tradeinvalue %>
+    </p>
+
+    <p>
       <strong>Description:</strong>
       <%= product.description %>
     </p>
+
     <%= link_to "Back", index_path %>
   <% else %>
     <%= link_to "More Details", product %>

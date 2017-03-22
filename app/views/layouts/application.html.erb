@@ -9,7 +9,16 @@
   </head>
 
   <body>
-    <h1>TChuk Games</h1>
+    <div id = 'header'>
+      <h1>TChuk Games</h1>
+      <%= form_tag search_results_path, :id => 'search' do %>
+        <%= text_field_tag :keywords %>
+        <% systems_array = System.all.map { |sys| [sys.name, sys.id] } %>
+        <%= select_tag(:system_id, options_for_select(systems_array),
+        :include_blank => true) %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

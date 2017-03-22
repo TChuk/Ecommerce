@@ -1,19 +1,24 @@
-<%= form_tag search_results_path do %>
-  <%= text_field_tag :keywords %>
-  <% systems_array = System.all.map { |sys| [sys.name, sys.id] } %>
-  <%= select_tag(:system_id, options_for_select(systems_array)) %>
-  <%= submit_tag 'Search' %>
-<% end %>
+
 <p>Currently Available products</p>
 <div>
-  <% @systems.each do |sys| %>
-    <%= link_to "#{sys.name}", sort_path(:id => sys.id) %>
-  <% end %>
+  Sort by System:
+  <ul>
+    <% @systems.each do |sys| %>
+      <li>
+        <%= link_to "#{sys.name}", sort_path(:id => sys.id) %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 <div>
-  <% @categories.each do |category| %>
-    <%= link_to "#{category.name}", catsort_path(:catid => category.id) %>
-  <% end %>
+  Sort by Condition:
+  <ul>
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to "#{category.name}", catsort_path(:catid => category.id) %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 <div id = products>
   <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
