@@ -13,4 +13,11 @@ class ProductsController < ApplicationController
     @products = Product.where(:system_id => params[:id])
     @sortedproducts = Product.where(:category_id => params[:catid])
   end
+
+  def search
+  end
+
+  def search_results
+    @products = Product.where("name LIKE ?", "%#{params[:keywords]}%")
+  end
 end

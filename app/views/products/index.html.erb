@@ -1,4 +1,7 @@
-<h1>TChuk Games</h1>
+<%= form_tag search_results_path do %>
+  <%= text_field_tag :keywords %>
+  <%= submit_tag 'Search' %>
+<% end %>
 <p>Currently Available products</p>
 <div>
   <% @systems.each do |sys| %>

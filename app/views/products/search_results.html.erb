@@ -1,0 +1,10 @@
+<%= link_to "Home", index_path %>
+<p>
+  Search results for <strong>'<%= params[:keywords] %>'</strong>:
+</p>
+<% if @products.empty? %>
+  <p>No products found.</p>
+<% end %>
+<div id = products>
+  <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
+</div>
