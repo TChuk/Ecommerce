@@ -1,5 +1,7 @@
 <%= form_tag search_results_path do %>
   <%= text_field_tag :keywords %>
+  <% systems_array = System.all.map { |sys| [sys.name, sys.id] } %>
+  <%= select_tag(:system_id, options_for_select(systems_array)) %>
   <%= submit_tag 'Search' %>
 <% end %>
 <p>Currently Available products</p>
@@ -16,3 +18,4 @@
 <div id = products>
   <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
 </div>
+<%= paginate @products %>

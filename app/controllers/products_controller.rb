@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.order(:name).page(params[:page]).per(3)
     @systems = System.all
     @categories = Category.all
   end
@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def search_results
-    @products = Product.where("name LIKE ?", "%#{params[:keywords]}%")
+    @products = Product.where("name LIKE ? AND system_id = ?", "%#{params[:keywords]}%",
+     "#{params[:system_id]}")
   end
 end
