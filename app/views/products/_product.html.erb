@@ -10,7 +10,7 @@
 
   <p>
     <strong>Price:</strong>
-    <%= product.price %>
+    <%= number_to_currency(product.calc_price) %>
   </p>
 
   <p>
@@ -30,7 +30,7 @@
 
     <p>
       <strong>Trade-in Value:</strong>
-      <%= @tradeinvalue %>
+      <%= number_to_currency(@product.trade_in_value) %>
     </p>
 
     <p>

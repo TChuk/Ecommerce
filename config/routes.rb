@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   get 'products/:id' => 'products#show', as: 'product', id: /\d+/
   get 'products/sort/:id' => 'products#sort', as: 'sort', id: /\d+/
   get 'products/condition/:catid' => 'products#sort', as: 'catsort', catid: /\d+/
-  get 'products/search_results' => 'products#index'
-  match 'search' => 'products#search', :as => 'search', :via => :get
-  match 'products/search_results' => 'products#search_results',
-:as => 'search_results', :via => :post
+  get 'products/search_results' => 'products#/search_results'
+  get 'search' => 'products#search', :as => 'search'
+  post 'products/search_results' => 'products#search_results',
+:as => 'search_results'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
