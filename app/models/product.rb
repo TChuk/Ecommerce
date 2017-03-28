@@ -6,6 +6,8 @@ class Product < ApplicationRecord
   validates :price, numericality: true
   validates :stock_quantity, numericality: true
 
+  mount_uploader :image, ImageUploader
+
   def trade_in_value
     if stock_quantity < 5
       quantity_adjustment = 1.15
