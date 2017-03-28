@@ -10,18 +10,15 @@ class ProductsController < ApplicationController
   end
 
   def sort
-    @products = Product.where(:system_id => params[:id]).order(:name)
-    @sortedproducts = Product.where(:category_id => params[:catid]).order(:name)
-  end
-
-  def search
+    @products = Product.where(system_id: params[:id]).order(:name)
+    @sortedproducts = Product.where(category_id: params[:catid]).order(:name)
   end
 
   def search_results
     system_params = params[:system_id]
-    @products = Product.where("name LIKE ?", "%#{params[:keywords]}%").order(:name)
+    @products = Product.where('name LIKE ?', "%#{params[:keywords]}%")
+    @products = @products.where('system_id = ?', system_params) \
     unless system_params.empty? || system_params.nil?
-      @products = @products.where("system_id = ?", system_params).order(:name)
-    end
+    @products = @products.order(:name)
   end
 end
