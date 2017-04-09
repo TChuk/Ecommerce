@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get 'products/condition/:catid' => 'products#sort', as: 'catsort', catid: /\d+/
 
   get 'products/search_results' => 'products#search_results'
-  post 'products/search_results' => 'products#search_results',
-:as => 'search_results'
+  post 'products/search_results' => 'products#search_results', :as => 'search_results'
+ post '/add_to_cart/:product_id' => 'line_items#add_to_cart', :as => 'add_to_cart'
 
   devise_for :users
   resources :users

@@ -9,7 +9,7 @@ class LineItem < ApplicationRecord
         item.quantity + 1
         save
     else
-        # product does not exist in cart
+        line_item.products << Item.new(product_id: product_id, quantity: 1)
         product = Product.find(product_id)
         items << product
     end

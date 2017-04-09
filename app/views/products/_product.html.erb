@@ -37,7 +37,7 @@
       <strong>Description:</strong>
       <%= product.description %>
     </p>
-
+    <%= button_to "Add to Cart", add_to_cart_path(:product_id => product), :method => :post %></td
     <%= link_to "Back", index_path %>
   <% else %>
     <%= link_to "More Details", product %>
