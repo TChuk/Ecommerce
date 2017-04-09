@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :category
   belongs_to :system
+  has_many :line_items
 
   validates :name, :price, :stock_quantity, :system_id, :category_id, presence: true
   validates :price, numericality: true
