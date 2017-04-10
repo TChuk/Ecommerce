@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   get 'products/search_results' => 'products#search_results'
   post 'products/search_results' => 'products#search_results', :as => 'search_results'
- post '/add_to_cart/:product_id' => 'line_items#add_to_cart', :as => 'add_to_cart'
+  post '/add_to_cart/:product_id' => 'products#add_to_cart', :as => 'add_to_cart'
 
-  devise_for :users
-  resources :users
+  get 'users/new' => 'users#new', :as => 'new_user'
+  post 'users/new' => 'users#create'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

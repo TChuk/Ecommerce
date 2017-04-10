@@ -9,6 +9,7 @@
   </head>
 
   <body>
+    <%= debug session[:cart] %>
     <div id = 'header'>
       <h1>TChuk Games</h1>
       <%= form_tag search_results_path, :id => 'search' do %>
@@ -18,7 +19,36 @@
         <%= submit_tag 'Search' %>
       <% end %>
     </div>
-    <%= link_to "Sign Up", new_user_path %>
+    <div>
+      Sort by System:
+      <ul>
+        <% @systems.each do |sys| %>
+          <li>
+            <%= link_to "#{sys.name}", sort_path(:id => sys.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div>
+      Sort by Condition:
+      <ul>
+        <% @categories.each do |category| %>
+          <li>
+            <%= link_to "#{category.name}", catsort_path(:catid => category.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <% if session[:user] == "guest" %>
+      <%= link_to "Sign Up", new_user_path %>
+    <% else %>
+      <div>
+        <strong><%= session[:user] %></strong>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,25 +1,5 @@
 
 <p>Currently Available products</p>
-<div>
-  Sort by System:
-  <ul>
-    <% @systems.each do |sys| %>
-      <li>
-        <%= link_to "#{sys.name}", sort_path(:id => sys.id) %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-<div>
-  Sort by Condition:
-  <ul>
-    <% @categories.each do |category| %>
-      <li>
-        <%= link_to "#{category.name}", catsort_path(:catid => category.id) %>
-      </li>
-    <% end %>
-  </ul>
-</div>
 <div id = products>
   <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
 </div>
