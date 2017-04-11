@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :all_systems
 
+  def systems
+    System.all
+  end
+  helper_method :systems
+
+  def categories
+    Category.all
+  end
+  helper_method :categories
   protected
 
     def configure_permitted_parameters

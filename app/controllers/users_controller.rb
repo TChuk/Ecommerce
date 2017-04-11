@@ -16,6 +16,27 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def authenticate
+    @user = User.where(user_params).first
+    if (@user.blank?)
+      session[:errors] = "User Not Found"
+      render :log_in
+    else
+      session[:user] = @user.username
+      flash[:success] = "Sign In successful"
+      redirect_to(root_path, fallback_location: root_path)
+    end
+  end
+
+  def log_in
+    @user = User.new
+  end
+
+  def log_out
+    session[:user] = "guest"
+    redirect_to(root_path, fallback_location: root_path)
+  end
+
   private
 
   def user_params

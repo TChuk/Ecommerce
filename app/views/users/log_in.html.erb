@@ -1,0 +1,17 @@
+<div>
+  <%= form_for @user, :url => {:controller => "users", :action => "authenticate"} do |f|%>
+  <% if session[:errors] %>
+    <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      <ul>
+        <% session[:errors].each do |msg| %>
+          <li class="error"><%= msg %></li>
+        <% end %>
+      </ul>
+    </p>
+    <% session[:errors] = nil %>
+  <% end %>
+    <%= f.text_field :username %>
+    <%= f.text_field :password %>
+    <%= f.submit 'Log In' %>
+  <% end %>
+</div>

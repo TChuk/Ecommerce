@@ -22,7 +22,7 @@
     <div>
       Sort by System:
       <ul>
-        <% @systems.each do |sys| %>
+        <% systems.each do |sys| %>
           <li>
             <%= link_to "#{sys.name}", sort_path(:id => sys.id) %>
           </li>
@@ -32,7 +32,7 @@
     <div>
       Sort by Condition:
       <ul>
-        <% @categories.each do |category| %>
+        <% categories.each do |category| %>
           <li>
             <%= link_to "#{category.name}", catsort_path(:catid => category.id) %>
           </li>
@@ -44,9 +44,11 @@
     <% end %>
     <% if session[:user] == "guest" %>
       <%= link_to "Sign Up", new_user_path %>
+      <%= link_to "Sign In", log_in_path %>
     <% else %>
       <div>
         <strong><%= session[:user] %></strong>
+        <%= link_to "Sign Out", :controller => :users, :action => :log_out %>
       </div>
     <% end %>
     <%= yield %>
