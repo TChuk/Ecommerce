@@ -1,6 +1,6 @@
 
 <p>Currently Available products</p>
 <div id = products>
-  <%= render partial: 'product', collection: @products, locals: {full_details: false} %>
+  <%= render partial: 'product', collection: @products, locals: {line_item: @line_item, full_details: false} %>
 </div>
 <%= paginate @products %>

@@ -9,7 +9,9 @@
   </head>
 
   <body>
-    <%= debug session[:cart] %>
+    <div class="col-xs-6 text-right">
+      <h1 class="cart-text"><%= render 'layouts/cart_text' %></h1>
+    </div>
     <div id = 'header'>
       <h1>TChuk Games</h1>
       <%= form_tag search_results_path, :id => 'search' do %>

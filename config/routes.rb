@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
-  get 'carts/show'
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]
 
   get '/', to: 'products#index', as: 'index'
 
   get 'products/:id' => 'products#show', as: 'product', id: /\d+/
   get 'products/sort/:id' => 'products#sort', as: 'sort', id: /\d+/
   get 'products/condition/:catid' => 'products#sort', as: 'catsort', catid: /\d+/
+  post 'products/:id' => 'line_items#create'
 
   get 'products/search_results' => 'products#search_results'
   post 'products/search_results' => 'products#search_results', :as => 'search_results'
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   get 'users/log_in' => 'users#log_in', :as => 'log_in'
   post 'users/log_in' => 'users#authenticate'
   get 'users/log_out'
-  
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

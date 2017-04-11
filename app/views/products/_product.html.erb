@@ -37,7 +37,13 @@
       <strong>Description:</strong>
       <%= product.description %>
     </p>
-    <%= button_to "Add to Cart", add_to_cart_path(product), method: :post %>
+    <%= form_for :line_item, remote: true do |f| %>
+      <div class="input-group-btn">
+        <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+        <%= f.hidden_field :product_id, value: product.id %>
+        <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+      </div>
+    <% end %>
     <%= link_to "Back", index_path %>
   <% else %>
     <%= link_to "More Details", product %>

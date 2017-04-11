@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   before_action :initialize_session
   protect_from_forgery with: :exception
 
+  def current_order
+    if !session[:order_id].nil?
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end
+  end
+  helper_method :current_order
+
   def all_systems
     System.all.map { |sys| [sys.name, sys.id] }
   end

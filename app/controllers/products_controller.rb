@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
     @products = Product.order(:name).page(params[:page]).per(6)
     @systems = System.all
     @categories = Category.all
+    @line_item = current_order.line_items.new
   end
 
   def show
