@@ -1,0 +1,11 @@
+<div>
+  Order Created!
+
+  Invoice:
+  <% @line_items.each do |line_item| %>
+    <%= line_item.product.name %>
+    <%= line_item.quantity %>
+    <%= line_item.price %>
+  <% end %>
+  <%= @order.subtotal %>
+</div>

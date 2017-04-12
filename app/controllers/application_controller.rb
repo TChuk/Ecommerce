@@ -35,6 +35,16 @@ class ApplicationController < ActionController::Base
     Category.all
   end
   helper_method :categories
+
+  def all_provinces
+    Province.all.map { |prov| [prov.name, prov.id] }
+  end
+  helper_method :all_provinces
+
+  def provinces
+    Province.all
+  end
+  helper_method :provinces
   protected
 
   #def configure_permitted_parameters
