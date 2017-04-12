@@ -34,6 +34,6 @@ private
 
   def finalize
     self[:price] = price
-    #self[:total_price] = quantity * self[:price]
+    self[:total_price] = quantity * self[:price]
   end
 end
