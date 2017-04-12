@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :line_items
   #before_create :set_order_status
-  before_save :update_subtotal
+  #before_save :update_subtotal
 
   def subtotal
     line_items.collect { |li| li.valid? ? (li.quantity * li.price) : 0 }.sum
@@ -13,6 +13,7 @@ class Order < ApplicationRecord
     #end
 
     def update_subtotal
+      self[:subtotal] ||= 0
       self[:subtotal] = subtotal
     end
   end

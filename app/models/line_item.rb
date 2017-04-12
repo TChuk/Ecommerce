@@ -7,16 +7,16 @@ class LineItem < ApplicationRecord
 
   before_save :finalize
 
-  def unit_price
+  def price
     if persisted?
-      self[:unit_price]
+      self[:price]
     else
       product.price
     end
   end
 
   def total_price
-    unit_price * quantity
+    price * quantity
   end
 
 private
@@ -33,7 +33,7 @@ private
   end
 
   def finalize
-    self[:unit_price] = unit_price
-    self[:total_price] = quantity * self[:unit_price]
+    self[:price] = price
+    #self[:total_price] = quantity * self[:price]
   end
 end

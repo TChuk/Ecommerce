@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resource :cart, only: [:show]
-  resources :order_items, only: [:create, :update, :destroy]
+  resources :line_items, only: [:create, :update, :destroy]
 
   get '/', to: 'products#index', as: 'index'
 
