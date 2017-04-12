@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'customers/show'
+  get 'customers/create'
+  get 'customers/update'
+  get 'customers/destroy'
+
   resource :cart, only: [:show]
   resources :line_items, only: [:create, :update, :destroy]
 
@@ -17,7 +22,7 @@ Rails.application.routes.draw do
   get 'users/new' => 'users#new', :as => 'new_user'
   post 'users/new' => 'users#create'
   get 'users/log_in' => 'users#log_in', :as => 'log_in'
-  post 'users/log_in' => 'users#authenticate'
+  post 'users/log_in/' => 'users#authenticate'
   get 'users/log_out'
 
   devise_for :admin_users, ActiveAdmin::Devise.config

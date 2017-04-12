@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = "Sign Up successful"
       session[:user] = @user.username
+      session[:user_id] = @user.id
       redirect_to(root_path, fallback_location: root_path)
     else
       session[:errors] = @user.errors.full_messages
@@ -18,11 +19,14 @@ class UsersController < ApplicationController
 
   def authenticate
     @user = User.where(user_params).first
+    #@password = User.select(:password).where(username_params).first
     if (@user.blank?)
-      session[:errors] = "User Not Found"
+      #session[:errors] = @user.errors.full_messages
+      @user = User.new
       render :log_in
     else
       session[:user] = @user.username
+      session[:user_id] = @user.id
       flash[:success] = "Sign In successful"
       redirect_to(root_path, fallback_location: root_path)
     end
@@ -41,6 +45,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password)
+  end
+
+  def username_params
+    params.require(:user).permit(:username)
+  end
+
+  def password_params
   end
 
 end
