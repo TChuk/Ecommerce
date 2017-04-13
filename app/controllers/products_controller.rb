@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
     @products = Product.order(:name).page(params[:page]).per(6)
     @systems = System.all
     @categories = Category.all
-    @line_item = current_order.line_items.new
+    @order = current_order
+    @line_items = current_order.line_items.new
   end
 
   def show
@@ -33,6 +34,6 @@ class ProductsController < ApplicationController
   private
 
   def initialize_session
-    session[:cart] ||= []
+    #session[:order_id] ||= 2
   end
 end

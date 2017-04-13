@@ -2,10 +2,38 @@
   Order Created!
 
   Invoice:
-  <% @line_items.each do |line_item| %>
-    <%= line_item.product.name %>
-    <%= line_item.quantity %>
-    <%= line_item.price %>
+  <% @order.line_items.each do |line_item| %>
+    <p>
+      Product:
+      <%= line_item.product.name %>
+    </p>
+    <p>
+      Quantity:
+      <%= line_item.quantity %>
+    </p>
+    <p>
+      Price:
+      <%= line_item.price %>
+    </p>
   <% end %>
-  <%= @order.subtotal %>
+  <p>
+    Subtotal:
+    <%= @order.subtotal %>
+  </p>
+  <p>
+    GST:
+    <%= @order.gst_rate * @order.subtotal %>
+  </p>
+  <p>
+    PST:
+    <%= @order.pst_rate * @order.subtotal %>
+  </p>
+  <p>
+    HST:
+    <%= @order.hst_rate * @order.subtotal %>
+  </p>
+  <p>
+    Total:
+    <%= @order.total %>
+  </p>
 </div>

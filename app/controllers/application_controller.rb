@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if !session[:order_id].nil?
-      Order.find(session[:order_id])
+      if Order.find_by_id(session[:order_id]).nil?
+        Order.new
+      else
+        Order.find_by_id(session[:order_id])
+      end
     else
       Order.new
     end
@@ -12,14 +16,18 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
 
-  def current_user
-    if !session[:user_id].nil?
-      User.find(session[:user_id])
+  def current_customer
+    if !session[:customer_id].nil?
+      if Customer.find_by_id(session[:customer_id]).nil?
+        Customer.new
+      else
+        Customer.find_by_id(session[:customer_id])
+      end
     else
       Customer.new
     end
   end
-  helper_method :current_user
+  helper_method :current_customer
 
   def all_systems
     System.all.map { |sys| [sys.name, sys.id] }
@@ -56,7 +64,6 @@ class ApplicationController < ActionController::Base
     private
 
     def initialize_session
-      session[:order_id] = 2
       session[:cart] ||= []
       session[:user] ||= "guest"
     end

@@ -11,6 +11,7 @@ class CustomersController < ApplicationController
     @order = current_order
     @customer = @order.build_customer(customer_params)
     if (@customer.save)
+      session[:customer_id] = @customer.id
       redirect_to(checkout_url, fallback_location: root_path)
     end
   end
