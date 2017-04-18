@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170412031606) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
@@ -21,9 +24,9 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.integer  "author_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -39,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_admin_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -60,8 +63,8 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.integer  "province_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["province_id"], name: "index_customers_on_province_id"
-    t.index ["user_id"], name: "index_customers_on_user_id"
+    t.index ["province_id"], name: "index_customers_on_province_id", using: :btree
+    t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -72,8 +75,8 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.decimal  "total_price"
-    t.index ["order_id"], name: "index_line_items_on_order_id"
-    t.index ["product_id"], name: "index_line_items_on_product_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id", using: :btree
+    t.index ["product_id"], name: "index_line_items_on_product_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -87,7 +90,7 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.datetime "updated_at",  null: false
     t.decimal  "subtotal"
     t.decimal  "total"
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
@@ -100,8 +103,8 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.datetime "updated_at",     null: false
     t.string   "image"
     t.integer  "system_id"
-    t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["system_id"], name: "index_products_on_system_id"
+    t.index ["category_id"], name: "index_products_on_category_id", using: :btree
+    t.index ["system_id"], name: "index_products_on_system_id", using: :btree
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -127,4 +130,11 @@ ActiveRecord::Schema.define(version: 20170412031606) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "customers", "provinces"
+  add_foreign_key "customers", "users"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "products"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "systems"
 end

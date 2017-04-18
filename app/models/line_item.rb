@@ -2,6 +2,7 @@ class LineItem < ApplicationRecord
   belongs_to :product
   belongs_to :order
 
+  validates :quantity, presence: true
   validate :product_present
   validate :order_present
 
