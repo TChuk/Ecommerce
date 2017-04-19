@@ -12,7 +12,7 @@ class LineItem < ApplicationRecord
     if persisted?
       self[:price]
     else
-      product.price
+      product.cal_price
     end
   end
 
